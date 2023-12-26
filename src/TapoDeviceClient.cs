@@ -79,7 +79,7 @@ namespace TapoConnect
             }
         }
 
-        public virtual Task<DeviceGetInfoResult> GetEnergyUsageAsync(TapoDeviceKey deviceKey)
+        public virtual Task<PlugResult> GetEnergyUsageAsync(TapoDeviceKey deviceKey)
         {
             if (deviceKey == null)
             {

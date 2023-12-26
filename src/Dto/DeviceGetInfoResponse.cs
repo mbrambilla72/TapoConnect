@@ -6,7 +6,9 @@ namespace TapoConnect.Dto
     public class DeviceGetInfoResponse : TapoResponse<DeviceGetInfoResult>
     {
     }
-
+    public class ResultPlugResponse : TapoResponse<PlugResult>
+    {
+    }
     public class DeviceGetInfoResult
     {
         [JsonPropertyName("device_id")]
@@ -100,7 +102,48 @@ namespace TapoConnect.Dto
         public DeviceGetInfoDefaultStateDto DefaultState { get; set; } = null!;
 
     }
+    public class PlugResult     {
+        [JsonPropertyName("ssid")]
+        public string Ssid { get; set; } = null!;
+        [JsonPropertyName("nickname")]
+        public string Nickname { get; set; } = null!;
+        /// <summary>
+        /// Current day runtime, in minutes.
+        /// </summary>
+        [JsonPropertyName("today_runtime")]
+        public int TodayRuntimeMinutes { get; set; }
 
+        public TimeSpan TodayRuntime => TimeSpan.FromMinutes(this.TodayRuntimeMinutes);
+
+        /// <summary>
+        /// Current month runtime, in minutes.
+        /// </summary>
+        [JsonPropertyName("month_runtime")]
+        public int MonthRuntimeMinutes { get; set; }
+
+        public TimeSpan MonthRuntime => TimeSpan.FromMinutes(this.MonthRuntimeMinutes);
+
+        /// <summary>
+        /// Current day energy, Wh.
+        /// </summary>
+        [JsonPropertyName("today_energy")]
+        public int TodayEnergy { get; set; }
+
+        public double TodayEnergykWh => this.TodayEnergy / 1000.0;
+
+        /// <summary>
+        /// Current month energy, Wh.
+        /// </summary>
+        [JsonPropertyName("month_energy")]
+        public int MonthEnergy { get; set; }
+
+        public double MonthEnergykWh => this.MonthEnergy / 1000.0;
+
+        [JsonPropertyName("current_power")]
+        public int CurrentPowerMilliwatts { get; set; }
+
+        public double CurrentPowerWatts => this.CurrentPowerMilliwatts / 1000.0;
+    }
     public class DeviceGetInfoDefaultStateDto
     {
         [JsonPropertyName("type")]

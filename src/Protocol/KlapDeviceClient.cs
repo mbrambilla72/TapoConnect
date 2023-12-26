@@ -81,7 +81,7 @@ namespace TapoConnect.Protocol
             return new KlapDeviceKey(deviceIp, handshake1.SessionCookie, handshake1.Timeout, handshake1.IssueTime, klapChiper);
         }
 
-        public virtual async Task<DeviceGetInfoResult> GetEnergyUsageAsync(TapoDeviceKey deviceKey)
+        public virtual async Task<PlugResult> GetEnergyUsageAsync(TapoDeviceKey deviceKey)
         {
             if (deviceKey == null)
             {
@@ -97,7 +97,7 @@ namespace TapoConnect.Protocol
 
             var jsonRequest = JsonSerializer.Serialize(request, _jsonSerializerOptions);
 
-            var response = await KlapRequestAsync<DeviceGetInfoResponse>(jsonRequest, deviceKey.DeviceIp, deviceKey.SessionCookie, protocol.KlapChiper);
+            var response = await KlapRequestAsync<ResultPlugResponse>(jsonRequest, deviceKey.DeviceIp, deviceKey.SessionCookie, protocol.KlapChiper);
 
             return response.Result;
         }
